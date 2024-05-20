@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Z Adventure with JavaScript DOM</title>
+    <style>
+        .dragon-ball {
+            color: orange;
+            cursor: pointer;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid orange;
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            width: 100px;
+        }
+        .uri-ball {
+            color: rgb(169, 37, 164);
+            cursor: pointer;
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid rgb(22, 155, 64);
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dragon Ball Z DOM Adventure</h1>
+    <select id="saiyanDropdown"></select>
+
+
+
+
+
+
+    <!-- Dragon Balls -->
+    <div id="dragonBall1" class="dragon-ball">Dragon Ball 1</div>
+    <div id="dragonBall2" class="dragon-ball">Dragon Ball 2</div>
+    <div id="dragonBall3" class="dragon-ball">Dragon Ball 3</div>
+
+    <!-- Button to Create New Dragon Ball -->
+    <button id="createButton">Create New Dragon Ball</button>
+    <button id="createSaiyan">Create New Saiyan</button>
+
+    <!-- An obstacle to be removed -->
+    <div id="obstacle" class="dragon-ball" style="background-color: red;">Obstacle</div>
+    
+    <script src="saiyans.js"></script>
+    <script>
+        const dropdown = document.getElementById('saiyanDropdown');
+        let fragment = document.createDocumentFragment();
+        saiyans.forEach(saiyan => {
+            const option = document.createElement('option');
+            option.value = saiyan.name;
+            option.textContent = saiyan.name;
+            fragment.appendChild(option);
+        });
+        dropdown.appendChild(fragment);
+
+
+
+        // SELECTING ELEMENTS
+        // Goku uses getElementById to find a specific Dragon Ball by its ID
+        let dragonBall1 = document.getElementById('dragonBall1');
+
+        // Vegeta uses getElementsByClassName to find all elements with the class 'saiyan'
+        let saiyans = document.getElementsByClassName('saiyan');
+
+        // Bulma uses getElementsByTagName to find all <button> elements
+        let buttons = document.getElementsByTagName('button');
+
+        // Gohan uses querySelector to find the first element that matches the CSS selector
+        let firstDragonBall = document.querySelector('.dragon-ball');
+
+        // Gohan uses querySelectorAll to find all elements that match the CSS selector
+        let allDragonBalls = document.querySelectorAll('.dragon-ball');
+
+        // MANIPULATING ELEMENTS
+        // Goku changes the text content of the first Dragon Ball
+        dragonBall1.textContent = 'Found Dragon Ball!';
+
+        // Bulma changes an attribute of the first Dragon Ball
+        dragonBall1.setAttribute('data-found', 'true');
+
+        // Vegeta changes the style of the first Dragon Ball
+        dragonBall1.style.color = 'gold';
+
+        // CREATING AND REMOVING ELEMENTS
+        // Bulma creates a new Dragon Ball and adds it to the document
+        let createButton = document.getElementById('createButton');
+        createButton.addEventListener('click', function ()
+        {
+            let newDragonBall = document.createElement('div');
+            newDragonBall.className = 'dragon-ball';
+            newDragonBall.textContent = 'New Dragon Ball';
+            document.body.appendChild(newDragonBall);
+        });
+
+        let createSaiyan = document.getElementById('createSaiyan');
+        createSaiyan.addEventListener('click', function ()
+        {
+            let newsaiyan = document.createElement('div');
+            newsaiyan.className = 'uri-ball';
+            newsaiyan.textContent = 'Uriel Delgado';
+            document.body.appendChild(newsaiyan);
+        });
+
+        
+        // Vegeta removes an obstacle from the document
+        let obstacle = document.getElementById('obstacle');
+        obstacle.parentNode.removeChild(obstacle);
+
+        // HANDLING EVENTS
+        // Gohan adds an event listener to each Dragon Ball to show an alert when clicked
+        allDragonBalls.forEach(function (dragonBall)
+        {
+            dragonBall.addEventListener('click', function ()
+            {
+                dragonBall.textContent = 'You found a Dragon Ball!';
+                dragonBall.style.color = 'gold';
+                dragonBall.setAttribute('data-found', 'true');
+            });
+        });
+
+        // Goku removes an event listener from a Dragon Ball
+        function foundDragonBall()
+        {
+            alert('You found a Dragon Ball!');
+        }
+        dragonBall1.addEventListener('click', foundDragonBall);
+        dragonBall1.removeEventListener('click', foundDragonBall);
+    </script>
+</body>
+
+</html>

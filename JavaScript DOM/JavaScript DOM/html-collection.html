@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMLCollection Example</title>
+</head>
+
+<body>
+    <p class="example">Paragraph 1</p>
+    <p class="example">Paragraph 2</p>
+    <p class="example">Paragraph 3</p>
+    <script>
+        // Select all elements with the class name "example"
+        const paragraphs = document.getElementsByClassName('example');
+
+        // HTMLCollection example
+        console.log(paragraphs); // Outputs: HTMLCollection(3) [p.example, p.example, p.example]
+
+        // Accessing elements by index
+        console.log(paragraphs[0].textContent); // Outputs: Paragraph 1
+        console.log(paragraphs[1].textContent); // Outputs: Paragraph 2
+        console.log(paragraphs[2].textContent); // Outputs: Paragraph 3
+
+        // Length property
+        console.log(paragraphs.length); // Outputs: 3
+
+        // Iterating over the HTMLCollection
+        for (let i = 0; i < paragraphs.length; i++)
+        {
+            console.log(paragraphs[i].textContent);
+        }
+
+        // Adding a new element dynamically
+        const newParagraph = document.createElement('p');
+        newParagraph.className = 'example';
+        newParagraph.textContent = 'Paragraph 4';
+        document.body.appendChild(newParagraph);
+
+        // The HTMLCollection is automatically updated
+        console.log(paragraphs.length); // Outputs: 4
+        console.log(paragraphs[3].textContent); // Outputs: Paragraph 4
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Examples</title>
+</head>
+<body>
+    <!-- Elements for demonstration -->
+    <div id="myDiv">Hello World</div>
+    <div class="myClass">First Element</div>
+    <div class="myClass">Second Element</div>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+    <div class="anotherClass">CSS Selector Example 1</div>
+    <div class="anotherClass">CSS Selector Example 2</div>
+    <div id="example">
+        <p>This is <strong>bold</strong> text.</p>
+        <p>And this is <em>italic</em> text.</p>
+    </div>
+    <div class="collectionExample">Item 1</div>
+    <div class="collectionExample">Item 2</div>
+    <div class="collectionExample">Item 3</div>
+
+    <script>
+        // Select by ID
+        const myDiv = document.getElementById('myDiv');
+        console.log("By ID:", myDiv.textContent); // Outputs: Hello World
+
+        // Select by Class Name
+        const classElements = document.getElementsByClassName('myClass');
+        console.log("By Class Name:", classElements[0].textContent); // Outputs: First Element
+        console.log("By Class Name:", classElements[1].textContent); // Outputs: Second Element
+
+        // Select by Tag Name
+        const paragraphs = document.getElementsByTagName('p');
+        console.log("By Tag Name:", paragraphs[0].textContent); // Outputs: Paragraph 1
+        console.log("By Tag Name:", paragraphs[1].textContent); // Outputs: Paragraph 2
+
+        // Select by CSS Selector - Single Element
+        const singleSelector = document.querySelector('.anotherClass');
+        console.log("By CSS Selector (Single):", singleSelector.textContent); // Outputs: CSS Selector Example 1
+
+        // Select by CSS Selector - Multiple Elements
+        const allSelectors = document.querySelectorAll('.anotherClass');
+        console.log("By CSS Selector (Multiple):", allSelectors[0].textContent); // Outputs: CSS Selector Example 1
+        console.log("By CSS Selector (Multiple):", allSelectors[1].textContent); // Outputs: CSS Selector Example 2
+
+        // HTMLCollection example
+        const exampleDiv = document.getElementById('example');
+        console.log("HTMLCollection:", exampleDiv.getElementsByTagName('p')); // Outputs: HTMLCollection of <p> elements
+
+        // Get the text content of the div
+        console.log("textContent:", exampleDiv.textContent);
+        // Outputs: "This is bold text. And this is italic text."
+
+        // Set the text content of the div
+        exampleDiv.textContent = "New text content without HTML.";
+        console.log("Updated textContent:", exampleDiv.textContent);
+        // Outputs: "New text content without HTML."
+
+        // Restore original HTML content
+        exampleDiv.innerHTML = '<p>This is <strong>bold</strong> text.</p><p>And this is <em>italic</em> text.</p>';
+
+        // Get the HTML content of the div
+        console.log("innerHTML:", exampleDiv.innerHTML);
+        // Outputs: "<p>This is <strong>bold</strong> text.</p><p>And this is <em>italic</em> text.</p>"
+
+        // Set the HTML content of the div
+        exampleDiv.innerHTML = "<p>New <strong>HTML</strong> content.</p>";
+        console.log("Updated innerHTML:", exampleDiv.innerHTML);
+        // Outputs: "<p>New <strong>HTML</strong> content.</p>"
+
+        // Additional HTMLCollection Examples
+        const collectionExampleElements = document.getElementsByClassName('collectionExample');
+        console.log("HTMLCollection by class 'collectionExample':", collectionExampleElements);
+
+        // Accessing elements by index
+        console.log("First element:", collectionExampleElements[0].textContent); // Outputs: Item 1
+        console.log("Second element:", collectionExampleElements[1].textContent); // Outputs: Item 2
+        console.log("Third element:", collectionExampleElements[2].textContent); // Outputs: Item 3
+
+        // Length property
+        console.log("Length of collection:", collectionExampleElements.length); // Outputs: 3
+
+        // Iterating over the HTMLCollection using a for loop
+        for (let i = 0; i < collectionExampleElements.length; i++) {
+            console.log("For loop:", collectionExampleElements[i].textContent);
+        }
+
+        // Converting HTMLCollection to an array and using forEach
+        Array.from(collectionExampleElements).forEach(element => {
+            console.log("Array.from forEach:", element.textContent);
+        });
+
+        // Adding a new element dynamically
+        const newElement = document.createElement('div');
+        newElement.className = 'collectionExample';
+        newElement.textContent = 'Item 4';
+        document.body.appendChild(newElement);
+
+        // The HTMLCollection is automatically updated
+        console.log("Updated length of collection:", collectionExampleElements.length); // Outputs: 4
+        console.log("Fourth element:", collectionExampleElements[3].textContent); // Outputs: Item 4
+
+        // Converting updated HTMLCollection to an array and using forEach
+        Array.from(collectionExampleElements).forEach(element => {
+            console.log("Updated Array.from forEach:", element.textContent);
+        });
+    </script>
+</body>
+</html>
